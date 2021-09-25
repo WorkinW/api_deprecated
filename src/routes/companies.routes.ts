@@ -1,6 +1,7 @@
-import { response, Router } from "express";
+import { Router } from "express";
 
 import { CompaniesRepository } from "../repositories/CompaniesRepository";
+import { CreateCompanyService } from "../services/CreateCompanyService";
 
 const companiesRoutes = Router();
 const companiesRepository = new CompaniesRepository();
@@ -8,13 +9,15 @@ const companiesRepository = new CompaniesRepository();
 companiesRoutes.post("/", (request, response) => {
   const { fantasy_name, social_name, cnpj, type_company } = request.body;
 
-  const companyAlreadyExists = companiesRepository.findByName(cnpj);
+  const createCompanyService = new CreateCompanyService(companiesRepository);
 
-  if (companyAlreadyExists) {
-    return response.status(400).json({ error: "Company already exists!" });
-  }
+  createCompanyService.execute({
+    fantasy_name,
+    social_name,
+    cnpj,
+    type_company,
+  });
 
-  companiesRepository.create({ fantasy_name, social_name, cnpj, type_company });
   return response.status(201).send();
 });
 
