@@ -34,6 +34,10 @@ class CompaniesRepository {
 
     console.log(this.companies);
   }
+
+  list(): Company[] {
+    return this.companies;
+  }
 }
 
 export { CompaniesRepository };
