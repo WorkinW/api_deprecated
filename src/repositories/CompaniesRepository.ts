@@ -38,6 +38,12 @@ class CompaniesRepository {
   list(): Company[] {
     return this.companies;
   }
+
+  findByName(cnpj: string): Company {
+    const company = this.companies.find((company) => company.cnpj === cnpj);
+
+    return company;
+  }
 }
 
 export { CompaniesRepository };
