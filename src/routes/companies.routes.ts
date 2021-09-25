@@ -1,27 +1,27 @@
-import { Router } from "express";
+import { response, Router } from "express";
 
-import { v4 as uuidv4 } from "uuid";
+import { CompaniesRepository } from "../repositories/CompaniesRepository";
 
 const companiesRoutes = Router();
-
-const companies = [];
+const companiesRepository = new CompaniesRepository();
 
 companiesRoutes.post("/", (request, response) => {
   const { fantasy_name, social_name, cnpj, type_company } = request.body;
 
-  const company = {
-    id: uuidv4(),
-    fantasy_name,
-    social_name,
-    cnpj,
-    type_company,
-  };
+  const companyAlreadyExists = companiesRepository.findByName(cnpj);
 
-  companies.push(company);
+  if (companyAlreadyExists) {
+    return response.status(400).json({ error: "Company already exists!" });
+  }
 
-  console.log(companies);
-
+  companiesRepository.create({ fantasy_name, social_name, cnpj, type_company });
   return response.status(201).send();
+});
+
+companiesRoutes.get("/", (request, response) => {
+  const all = companiesRepository.list();
+
+  return response.json(all);
 });
 
 export { companiesRoutes };
