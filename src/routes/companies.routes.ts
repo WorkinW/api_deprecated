@@ -1,26 +1,14 @@
 import { Router } from "express";
 
-import { v4 as uuidv4 } from "uuid";
+import { CompaniesRepository } from "../repositories/CompaniesRepository";
 
 const companiesRoutes = Router();
-
-const companies = [];
+const companiesRepository = new CompaniesRepository();
 
 companiesRoutes.post("/", (request, response) => {
   const { fantasy_name, social_name, cnpj, type_company } = request.body;
 
-  const company = {
-    id: uuidv4(),
-    fantasy_name,
-    social_name,
-    cnpj,
-    type_company,
-  };
-
-  companies.push(company);
-
-  console.log(companies);
-
+  companiesRepository.create({ fantasy_name, social_name, cnpj, type_company });
   return response.status(201).send();
 });
 
