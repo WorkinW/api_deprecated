@@ -31,8 +31,6 @@ class CompaniesRepository {
     });
 
     this.companies.push(company);
-
-    console.log(this.companies);
   }
 
   list(): Company[] {
