@@ -1,4 +1,4 @@
-import { CompaniesRepository } from "../repositories/CompaniesRepository";
+import { ICompaniesRepository } from "../repositories/ICompaniesRepository";
 
 interface IRequest {
   fantasy_name: string;
@@ -8,7 +8,7 @@ interface IRequest {
 }
 
 class CreateCompanyService {
-  constructor(private companiesRepository: CompaniesRepository) {}
+  constructor(private companiesRepository: ICompaniesRepository) {}
 
   execute({ fantasy_name, social_name, cnpj, type_company }: IRequest): void {
     const companyAlreadyExists = this.companiesRepository.findByName(cnpj);

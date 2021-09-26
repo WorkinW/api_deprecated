@@ -1,12 +1,4 @@
 import { Company } from "../model/Company";
-
-interface ICreateCompanyDTO {
-  fantasy_name: string;
-  social_name: string;
-  cnpj: string;
-  type_company: string;
-}
-
 class CompaniesRepository {
   private companies: Company[];
 
