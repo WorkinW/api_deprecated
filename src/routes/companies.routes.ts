@@ -1,27 +1,16 @@
 import { Router } from "express";
 
-import { v4 as uuidv4 } from "uuid";
+import { createCompanyController } from "../modules/Companies/useCases/createCompany";
+import { listCompaniesController } from "../modules/Companies/useCases/ListCompanies";
 
 const companiesRoutes = Router();
 
-const companies = [];
-
 companiesRoutes.post("/", (request, response) => {
-  const { fantasy_name, social_name, cnpj, type_company } = request.body;
+  return createCompanyController.handle(request, response);
+});
 
-  const company = {
-    id: uuidv4(),
-    fantasy_name,
-    social_name,
-    cnpj,
-    type_company,
-  };
-
-  companies.push(company);
-
-  console.log(companies);
-
-  return response.status(201).send();
+companiesRoutes.get("/", (request, response) => {
+  return listCompaniesController.handle(request, response);
 });
 
 export { companiesRoutes };
