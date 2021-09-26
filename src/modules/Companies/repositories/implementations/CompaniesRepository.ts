@@ -1,17 +1,20 @@
-import { Company } from "../model/Company";
-
-interface ICreateCompanyDTO {
-  fantasy_name: string;
-  social_name: string;
-  cnpj: string;
-  type_company: string;
-}
+import { Company } from "../../model/Company";
+import { ICreateCompanyDTO } from "../ICompaniesRepository";
 
 class CompaniesRepository {
   private companies: Company[];
 
-  constructor() {
+  private static INSTANCE: CompaniesRepository;
+
+  private constructor() {
     this.companies = [];
+  }
+
+  public static getInstance(): CompaniesRepository {
+    if (!CompaniesRepository.INSTANCE) {
+      CompaniesRepository.INSTANCE = new CompaniesRepository();
+    }
+    return CompaniesRepository.INSTANCE;
   }
 
   create({

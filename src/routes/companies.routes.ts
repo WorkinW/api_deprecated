@@ -1,27 +1,16 @@
-import { response, Router } from "express";
+import { Router } from "express";
 
-import { CompaniesRepository } from "../repositories/CompaniesRepository";
+import { createCompanyController } from "../modules/Companies/useCases/createCompany";
+import { listCompaniesController } from "../modules/Companies/useCases/ListCompanies";
 
 const companiesRoutes = Router();
-const companiesRepository = new CompaniesRepository();
 
 companiesRoutes.post("/", (request, response) => {
-  const { fantasy_name, social_name, cnpj, type_company } = request.body;
-
-  const companyAlreadyExists = companiesRepository.findByName(cnpj);
-
-  if (companyAlreadyExists) {
-    return response.status(400).json({ error: "Company already exists!" });
-  }
-
-  companiesRepository.create({ fantasy_name, social_name, cnpj, type_company });
-  return response.status(201).send();
+  return createCompanyController.handle(request, response);
 });
 
 companiesRoutes.get("/", (request, response) => {
-  const all = companiesRepository.list();
-
-  return response.json(all);
+  return listCompaniesController.handle(request, response);
 });
 
 export { companiesRoutes };
