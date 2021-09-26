@@ -7,7 +7,6 @@ interface ICreateCompanyDTO {
   type_company: string;
 }
 
-
 interface ICompaniesRepository {
   findByName(cnpj: string): Company;
   list(): Company[];
