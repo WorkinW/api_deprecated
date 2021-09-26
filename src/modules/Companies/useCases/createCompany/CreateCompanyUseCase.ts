@@ -1,4 +1,4 @@
-import { ICompaniesRepository } from "../repositories/ICompaniesRepository";
+import { ICompaniesRepository } from "../../repositories/ICompaniesRepository";
 
 interface IRequest {
   fantasy_name: string;
@@ -7,7 +7,7 @@ interface IRequest {
   type_company: string;
 }
 
-class CreateCompanyService {
+class CreateCompanyUseCase {
   constructor(private companiesRepository: ICompaniesRepository) {}
 
   execute({ fantasy_name, social_name, cnpj, type_company }: IRequest): void {
@@ -26,4 +26,4 @@ class CreateCompanyService {
   }
 }
 
-export { CreateCompanyService };
+export { CreateCompanyUseCase };
