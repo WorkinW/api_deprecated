@@ -1,7 +1,7 @@
 import { Router } from "express";
 
-import { CompaniesRepository } from "../repositories/CompaniesRepository";
-import { CreateCompanyService } from "../services/CreateCompanyService";
+import { CompaniesRepository } from "../modules/Companies/repositories/CompaniesRepository";
+import { CreateCompanyService } from "../modules/Companies/services/CreateCompanyService";
 
 const companiesRoutes = Router();
 const companiesRepository = new CompaniesRepository();
