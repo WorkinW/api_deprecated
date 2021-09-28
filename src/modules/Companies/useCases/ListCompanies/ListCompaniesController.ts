@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { ListCompaniesUseCase } from "./ListCompaniesUseCase";
 
+import { ListCompaniesUseCase } from "./ListCompaniesUseCase";
 
 class ListCompaniesController {
   constructor(private listCompaniesUseCase: ListCompaniesUseCase) { }

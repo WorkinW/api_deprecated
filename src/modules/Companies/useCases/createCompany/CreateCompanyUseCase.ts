@@ -10,8 +10,15 @@ interface IRequest {
 class CreateCompanyUseCase {
   constructor(private companiesRepository: ICompaniesRepository) {}
 
-  execute({ fantasy_name, social_name, cnpj, type_company }: IRequest): void {
-    const companyAlreadyExists = this.companiesRepository.findByName(cnpj);
+  async execute({
+    fantasy_name,
+    social_name,
+    cnpj,
+    type_company,
+  }: IRequest): Promise<void> {
+    const companyAlreadyExists = await this.companiesRepository.findByName(
+      cnpj
+    );
 
     if (companyAlreadyExists) {
       throw new Error("Company already exists!");

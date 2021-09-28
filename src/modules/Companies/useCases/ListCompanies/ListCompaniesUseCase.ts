@@ -1,10 +1,10 @@
-import { Company } from "../../model/Company";
+import { Company } from "../../entities/Company";
 import { ICompaniesRepository } from "../../repositories/ICompaniesRepository";
 
 class ListCompaniesUseCase {
   constructor(private companiesRepository: ICompaniesRepository) { }
 
-  execute(): Company[] {
+  execute(): Promise<Company[]> {
     const companies = this.companiesRepository.list();
 
     return companies;

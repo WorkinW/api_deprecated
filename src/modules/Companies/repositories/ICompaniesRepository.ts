@@ -1,4 +1,4 @@
-import { Company } from "../model/Company";
+import { Company } from "../entities/Company";
 
 interface ICreateCompanyDTO {
   fantasy_name: string;
@@ -8,14 +8,14 @@ interface ICreateCompanyDTO {
 }
 
 interface ICompaniesRepository {
-  findByName(cnpj: string): Company;
-  list(): Company[];
+  findByName(cnpj: string): Promise<Company>;
+  list(): Promise<Company[]>;
   create({
     fantasy_name,
     social_name,
     cnpj,
     type_company,
-  }: ICreateCompanyDTO): void;
+  }: ICreateCompanyDTO): Promise<void>;
 }
 
 export { ICompaniesRepository, ICreateCompanyDTO };
