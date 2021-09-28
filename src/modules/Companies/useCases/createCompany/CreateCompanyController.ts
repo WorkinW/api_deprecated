@@ -6,10 +6,10 @@ import { CreateCompanyUseCase } from "./CreateCompanyUseCase";
 class CreateCompanyController {
   constructor(private createCompanyUseCase: CreateCompanyUseCase) {}
 
-  handle(request: Request, response: Response): Response {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { fantasy_name, social_name, cnpj, type_company } = request.body;
 
-    this.createCompanyUseCase.execute({
+    await this.createCompanyUseCase.execute({
       fantasy_name,
       social_name,
       cnpj,

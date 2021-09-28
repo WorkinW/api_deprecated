@@ -2,12 +2,14 @@ import { CompaniesRepository } from "../../repositories/implementations/Companie
 import { CreateCompanyController } from "./CreateCompanyController";
 import { CreateCompanyUseCase } from "./CreateCompanyUseCase";
 
-const companiesRepository = CompaniesRepository.getInstance();
+export default (): CreateCompanyController => {
+  const companiesRepository = new CompaniesRepository();
 
-const createCompanyUseCase = new CreateCompanyUseCase(companiesRepository);
+  const createCompanyUseCase = new CreateCompanyUseCase(companiesRepository);
 
-const createCompanyController = new CreateCompanyController(
-  createCompanyUseCase
-);
+  const createCompanyController = new CreateCompanyController(
+    createCompanyUseCase
+  );
 
-export { createCompanyController, createCompanyUseCase };
+  return createCompanyController;
+};
