@@ -1,3 +1,5 @@
+import { inject, injectable } from "tsyringe";
+
 import { ICompaniesRepository } from "../../repositories/ICompaniesRepository";
 
 interface IRequest {
@@ -7,8 +9,12 @@ interface IRequest {
   type_company: string;
 }
 
+@injectable()
 class CreateCompanyUseCase {
-  constructor(private companiesRepository: ICompaniesRepository) {}
+  constructor(
+    @inject("CompaniesRepository")
+    private companiesRepository: ICompaniesRepository
+  ) { }
 
   async execute({
     fantasy_name,
