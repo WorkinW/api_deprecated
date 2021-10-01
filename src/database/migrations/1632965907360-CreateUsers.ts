@@ -13,6 +13,7 @@ export class CreateUsers1632965907360 implements MigrationInterface {
           {
             name: "company_id",
             type: "varchar",
+            isNullable: true,
           },
           {
             name: "name",
