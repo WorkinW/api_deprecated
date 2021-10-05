@@ -1,5 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
+import { AppError } from "../../../../errors/AppError";
 import { ICompaniesRepository } from "../../repositories/ICompaniesRepository";
 
 interface IRequest {
@@ -27,7 +28,7 @@ class CreateCompanyUseCase {
     );
 
     if (companyAlreadyExists) {
-      throw new Error("Company already exists!");
+      throw new AppError("Company already exists!");
     }
 
     this.companiesRepository.create({
