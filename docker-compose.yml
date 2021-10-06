@@ -4,7 +4,7 @@ services:
   database: #ESSE É O NOME DO SERVICE QUE DEVE ESTAR NO ARQUIVO DE CRIAÇÃO DE CONEXÃO
     image: postgres
     container_name: database_workin
-    restart: on-failure
+    restart: always
     ports:
       - 5432:5432
     environment:

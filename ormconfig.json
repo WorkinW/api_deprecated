@@ -2,15 +2,11 @@
   "type": "postgres",
   "port": 5432,
   "host": "localhost",
-  "username": "lucas",
-  "password": "lucas",
+  "username": "docker",
+  "password": "workin",
   "database": "workin",
-  "migrations": [
-    "./src/database/migrations/*.ts"
-  ],
-  "entities": [
-    "./src/modules/**/entities/*.ts"
-  ],
+  "migrations": ["./src/database/migrations/*.ts"],
+  "entities": ["./src/modules/**/entities/*.ts"],
   "cli": {
     "migrationsDir": "./src/database/migrations"
   }
