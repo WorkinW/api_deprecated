@@ -4,6 +4,8 @@ interface ICreateUserDTO {
   email: string;
   password: string;
   cpf: string;
+  id?: string;
+  avatar?: string;
 }
 
 export { ICreateUserDTO };
