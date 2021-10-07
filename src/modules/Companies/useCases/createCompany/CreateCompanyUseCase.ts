@@ -1,3 +1,6 @@
+import { inject, injectable } from "tsyringe";
+
+import { AppError } from "../../../../errors/AppError";
 import { ICompaniesRepository } from "../../repositories/ICompaniesRepository";
 
 interface IRequest {
@@ -7,14 +10,25 @@ interface IRequest {
   type_company: string;
 }
 
+@injectable()
 class CreateCompanyUseCase {
-  constructor(private companiesRepository: ICompaniesRepository) {}
+  constructor(
+    @inject("CompaniesRepository")
+    private companiesRepository: ICompaniesRepository
+  ) { }
 
-  execute({ fantasy_name, social_name, cnpj, type_company }: IRequest): void {
-    const companyAlreadyExists = this.companiesRepository.findByName(cnpj);
+  async execute({
+    fantasy_name,
+    social_name,
+    cnpj,
+    type_company,
+  }: IRequest): Promise<void> {
+    const companyAlreadyExists = await this.companiesRepository.findByName(
+      cnpj
+    );
 
     if (companyAlreadyExists) {
-      throw new Error("Company already exists!");
+      throw new AppError("Company already exists!");
     }
 
     this.companiesRepository.create({

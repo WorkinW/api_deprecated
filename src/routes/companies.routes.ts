@@ -1,16 +1,18 @@
 import { Router } from "express";
 
-import { createCompanyController } from "../modules/Companies/useCases/createCompany";
-import { listCompaniesController } from "../modules/Companies/useCases/ListCompanies";
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
+import { CreateCompanyController } from "../modules/Companies/useCases/createCompany/CreateCompanyController";
+import { ListCompaniesController } from "../modules/Companies/useCases/ListCompanies/ListCompaniesController";
 
 const companiesRoutes = Router();
 
-companiesRoutes.post("/", (request, response) => {
-  return createCompanyController.handle(request, response);
-});
+const createCompanyController = new CreateCompanyController();
+const listCompaniesController = new ListCompaniesController();
 
-companiesRoutes.get("/", (request, response) => {
-  return listCompaniesController.handle(request, response);
-});
+companiesRoutes.use(ensureAuthenticated);
+
+companiesRoutes.get("/", listCompaniesController.handle);
+
+companiesRoutes.post("/", createCompanyController.handle);
 
 export { companiesRoutes };

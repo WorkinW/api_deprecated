@@ -1,48 +1,41 @@
-import { Company } from "../../model/Company";
-import { ICreateCompanyDTO } from "../ICompaniesRepository";
+import { getRepository, Repository } from "typeorm";
 
-class CompaniesRepository {
-  private companies: Company[];
+import { Company } from "../../entities/Company";
+import {
+  ICompaniesRepository,
+  ICreateCompanyDTO,
+} from "../ICompaniesRepository";
 
-  private static INSTANCE: CompaniesRepository;
+class CompaniesRepository implements ICompaniesRepository {
+  private repository: Repository<Company>;
 
-  private constructor() {
-    this.companies = [];
+  constructor() {
+    this.repository = getRepository(Company);
   }
 
-  public static getInstance(): CompaniesRepository {
-    if (!CompaniesRepository.INSTANCE) {
-      CompaniesRepository.INSTANCE = new CompaniesRepository();
-    }
-    return CompaniesRepository.INSTANCE;
-  }
-
-  create({
+  async create({
     fantasy_name,
     social_name,
     cnpj,
     type_company,
-  }: ICreateCompanyDTO): void {
-    const company = new Company();
-
-    Object.assign(company, {
+  }: ICreateCompanyDTO): Promise<void> {
+    const company = this.repository.create({
       fantasy_name,
       social_name,
       cnpj,
       type_company,
-      created_at: new Date(),
     });
 
-    this.companies.push(company);
+    await this.repository.save(company);
   }
 
-  list(): Company[] {
-    return this.companies;
+  async list(): Promise<Company[]> {
+    const companies = await this.repository.find();
+    return companies;
   }
 
-  findByName(cnpj: string): Company {
-    const company = this.companies.find((company) => company.cnpj === cnpj);
-
+  async findByName(cnpj: string): Promise<Company> {
+    const company = await this.repository.findOne({ cnpj });
     return company;
   }
 }
