@@ -34,7 +34,7 @@ class CompaniesRepository implements ICompaniesRepository {
     return companies;
   }
 
-  async findByName(cnpj: string): Promise<Company> {
+  async findByCnpj(cnpj: string): Promise<Company> {
     const company = await this.repository.findOne({ cnpj });
     return company;
   }

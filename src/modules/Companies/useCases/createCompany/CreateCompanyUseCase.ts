@@ -23,7 +23,7 @@ class CreateCompanyUseCase {
     cnpj,
     type_company,
   }: IRequest): Promise<void> {
-    const companyAlreadyExists = await this.companiesRepository.findByName(
+    const companyAlreadyExists = await this.companiesRepository.findByCnpj(
       cnpj
     );
 
