@@ -8,7 +8,7 @@ interface ICreateCompanyDTO {
 }
 
 interface ICompaniesRepository {
-  findByName(cnpj: string): Promise<Company>;
+  findByCnpj(cnpj: string): Promise<Company>;
   list(): Promise<Company[]>;
   create({
     fantasy_name,
