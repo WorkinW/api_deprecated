@@ -1,4 +1,4 @@
-import { AppError } from "@errors/AppError";
+import { AppError } from "@shared/errors/AppError";
 import { CompaniesRepositoryInMemory } from "@modules/Companies/repositories/in-memory/CompaniesRepositoryInMemory";
 
 import { CreateCompanyUseCase } from "./CreateCompanyUseCase";
