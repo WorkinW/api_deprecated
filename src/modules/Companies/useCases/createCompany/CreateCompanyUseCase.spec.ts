@@ -1,5 +1,6 @@
-import { AppError } from "../../../../errors/AppError";
-import { CompaniesRepositoryInMemory } from "../../repositories/in-memory/CompaniesRepositoryInMemory";
+import { AppError } from "@errors/AppError";
+import { CompaniesRepositoryInMemory } from "@modules/Companies/repositories/in-memory/CompaniesRepositoryInMemory";
+
 import { CreateCompanyUseCase } from "./CreateCompanyUseCase";
 
 let createCompanyUseCase: CreateCompanyUseCase;
