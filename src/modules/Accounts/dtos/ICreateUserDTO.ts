@@ -6,6 +6,7 @@ interface ICreateUserDTO {
   cpf: string;
   id?: string;
   avatar?: string;
+  isAdmin?: boolean;
 }
 
 export { ICreateUserDTO };

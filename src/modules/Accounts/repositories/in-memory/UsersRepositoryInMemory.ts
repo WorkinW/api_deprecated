@@ -13,7 +13,8 @@ class UsersRepositoryInMemory implements IUsersRepository {
     password,
     cpf,
     avatar,
-  }: ICreateUserDTO): Promise<void> {
+    isAdmin,
+  }: ICreateUserDTO): Promise<User> {
     const user = new User();
 
     Object.assign(user, {
@@ -23,9 +24,12 @@ class UsersRepositoryInMemory implements IUsersRepository {
       password,
       cpf,
       avatar,
+      isAdmin,
     });
 
     this.users.push(user);
+
+    return user;
   }
 
   update({

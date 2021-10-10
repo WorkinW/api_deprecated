@@ -18,7 +18,8 @@ class UsersRepository implements IUsersRepository {
     password,
     cpf,
     avatar,
-  }: ICreateUserDTO): Promise<void> {
+    isAdmin,
+  }: ICreateUserDTO): Promise<User> {
     const user = this.repository.create({
       name,
       username,
@@ -26,9 +27,12 @@ class UsersRepository implements IUsersRepository {
       password,
       cpf,
       avatar,
+      isAdmin,
     });
 
     await this.repository.save(user);
+
+    return user;
   }
 
   async update({
