@@ -1,5 +1,5 @@
 import { ICreateUserDTO } from "../dtos/ICreateUserDTO";
-import { User } from "../entities/User";
+import { User } from "../infra/typeorm/entities/User";
 
 interface IUsersRepository {
   create({
@@ -9,7 +9,8 @@ interface IUsersRepository {
     password,
     cpf,
     avatar,
-  }: ICreateUserDTO): Promise<void>;
+    isAdmin,
+  }: ICreateUserDTO): Promise<User>;
   update({
     name,
     username,
@@ -17,6 +18,7 @@ interface IUsersRepository {
     password,
     cpf,
     avatar,
+    isAdmin,
   }: ICreateUserDTO): Promise<void>;
   findByEmail(email: string): Promise<User>;
   findById(id: string): Promise<User>;

@@ -1,10 +1,10 @@
-import { getRepository, Repository } from "typeorm";
-
-import { Company } from "../../entities/Company";
 import {
   ICompaniesRepository,
   ICreateCompanyDTO,
-} from "../ICompaniesRepository";
+} from "@modules/Companies/repositories/ICompaniesRepository";
+import { getRepository, Repository } from "typeorm";
+
+import { Company } from "../entities/Company";
 
 class CompaniesRepository implements ICompaniesRepository {
   private repository: Repository<Company>;

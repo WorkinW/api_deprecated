@@ -1,4 +1,4 @@
-import { Company } from "../entities/Company";
+import { Company } from "../infra/typeorm/entities/Company";
 
 interface ICreateCompanyDTO {
   fantasy_name: string;

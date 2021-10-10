@@ -1,5 +1,6 @@
-import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
-import { User } from "../../entities/User";
+import { ICreateUserDTO } from "@modules/Accounts/dtos/ICreateUserDTO";
+import { User } from "@modules/Accounts/infra/typeorm/entities/User";
+
 import { IUsersRepository } from "../IUsersRepository";
 
 class UsersRepositoryInMemory implements IUsersRepository {
@@ -12,7 +13,8 @@ class UsersRepositoryInMemory implements IUsersRepository {
     password,
     cpf,
     avatar,
-  }: ICreateUserDTO): Promise<void> {
+    isAdmin,
+  }: ICreateUserDTO): Promise<User> {
     const user = new User();
 
     Object.assign(user, {
@@ -22,9 +24,12 @@ class UsersRepositoryInMemory implements IUsersRepository {
       password,
       cpf,
       avatar,
+      isAdmin,
     });
 
     this.users.push(user);
+
+    return user;
   }
 
   update({
