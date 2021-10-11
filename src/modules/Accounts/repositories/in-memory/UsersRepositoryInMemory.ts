@@ -14,6 +14,7 @@ class UsersRepositoryInMemory implements IUsersRepository {
     cpf,
     avatar,
     isAdmin,
+    company_id,
   }: ICreateUserDTO): Promise<User> {
     const user = new User();
 
@@ -25,6 +26,7 @@ class UsersRepositoryInMemory implements IUsersRepository {
       cpf,
       avatar,
       isAdmin,
+      company_id,
     });
 
     this.users.push(user);
@@ -49,6 +51,10 @@ class UsersRepositoryInMemory implements IUsersRepository {
 
   async findById(id: string): Promise<User> {
     return this.users.find((user) => user.id === id);
+  }
+
+  async findAllNonAdminUsers(): Promise<User[]> {
+    return this.users.filter((user) => !user.isAdmin);
   }
 }
 

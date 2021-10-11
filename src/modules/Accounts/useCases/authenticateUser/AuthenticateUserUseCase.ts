@@ -1,8 +1,9 @@
-import { AppError } from "@shared/errors/AppError";
 import { IUsersRepository } from "@modules/Accounts/repositories/IUsersRepository";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
+
+import { AppError } from "@shared/errors/AppError";
 
 interface IRequest {
   email: string;
@@ -11,6 +12,7 @@ interface IRequest {
 
 interface IResponse {
   user: {
+    id: string;
     name: string;
     email: string;
   };
@@ -45,6 +47,7 @@ class AuthenticateUserUseCase {
     const tokenReturn: IResponse = {
       token,
       user: {
+        id: user.id,
         name: user.name,
         email: user.email,
       },
