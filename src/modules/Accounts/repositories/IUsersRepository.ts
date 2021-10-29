@@ -1,5 +1,6 @@
 import { ICreateUserDTO } from "../dtos/ICreateUserDTO";
-import { User } from "../entities/User";
+import { ISearchUsersDTO } from "../dtos/ISearchUsersDTO";
+import { User } from "../infra/typeorm/entities/User";
 
 interface IUsersRepository {
   create({
@@ -9,7 +10,9 @@ interface IUsersRepository {
     password,
     cpf,
     avatar,
-  }: ICreateUserDTO): Promise<void>;
+    isAdmin,
+    company_id,
+  }: ICreateUserDTO): Promise<User>;
   update({
     name,
     username,
@@ -17,9 +20,16 @@ interface IUsersRepository {
     password,
     cpf,
     avatar,
+    isAdmin,
+    company_id,
   }: ICreateUserDTO): Promise<void>;
   findByEmail(email: string): Promise<User>;
   findById(id: string): Promise<User>;
+  findAllNonAdminUsers({
+    user_id,
+    name,
+    cpf,
+  }: ISearchUsersDTO): Promise<User[]>;
 }
 
 export { IUsersRepository };

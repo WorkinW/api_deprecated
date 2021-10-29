@@ -1,5 +1,6 @@
-import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
-import { User } from "../../entities/User";
+import { ICreateUserDTO } from "@modules/Accounts/dtos/ICreateUserDTO";
+import { User } from "@modules/Accounts/infra/typeorm/entities/User";
+
 import { IUsersRepository } from "../IUsersRepository";
 
 class UsersRepositoryInMemory implements IUsersRepository {
@@ -12,7 +13,9 @@ class UsersRepositoryInMemory implements IUsersRepository {
     password,
     cpf,
     avatar,
-  }: ICreateUserDTO): Promise<void> {
+    isAdmin,
+    company_id,
+  }: ICreateUserDTO): Promise<User> {
     const user = new User();
 
     Object.assign(user, {
@@ -22,9 +25,13 @@ class UsersRepositoryInMemory implements IUsersRepository {
       password,
       cpf,
       avatar,
+      isAdmin,
+      company_id,
     });
 
     this.users.push(user);
+
+    return user;
   }
 
   update({
@@ -44,6 +51,10 @@ class UsersRepositoryInMemory implements IUsersRepository {
 
   async findById(id: string): Promise<User> {
     return this.users.find((user) => user.id === id);
+  }
+
+  async findAllNonAdminUsers(): Promise<User[]> {
+    return this.users.filter((user) => !user.isAdmin);
   }
 }
 

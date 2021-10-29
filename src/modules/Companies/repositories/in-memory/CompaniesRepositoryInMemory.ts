@@ -1,4 +1,5 @@
-import { Company } from "../../entities/Company";
+import { Company } from "@modules/Companies/infra/typeorm/entities/Company";
+
 import {
   ICompaniesRepository,
   ICreateCompanyDTO,
