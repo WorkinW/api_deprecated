@@ -16,7 +16,9 @@ interface IRequest {
 @injectable()
 class CreateSpotUseCase {
   constructor(
+    @inject("SpotsRepository")
     private spotsRepository: ISpotsRepository,
+    @inject("DayjsDateProvider")
     private dateProvider: IDateProvider
   ) { }
   async execute({
@@ -47,7 +49,7 @@ class CreateSpotUseCase {
     if (spot) {
       const dateNow = this.dateProvider.dateNow();
       const spotDate = spot.created_at;
-      compare = this.dateProvider.compareInHours(spotDate, dateNow);
+      compare = this.dateProvider.compareInHours(dateNow, spotDate);
     }
 
     const newSpot = await this.spotsRepository.create({

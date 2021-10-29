@@ -14,6 +14,7 @@ export class CreateSpots1634073497731 implements MigrationInterface {
           {
             name: "company_id",
             type: "uuid",
+            isNullable: true,
           },
           {
             name: "user_id",
@@ -22,6 +23,7 @@ export class CreateSpots1634073497731 implements MigrationInterface {
           {
             name: "time_course",
             type: "numeric",
+            isNullable: true,
           },
           {
             name: "time_position",
