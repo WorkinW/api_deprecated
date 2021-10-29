@@ -33,8 +33,6 @@ describe("Create Spot", () => {
       time_position: Position.Entry,
     });
 
-    console.log(spot);
-
     expect(spot).toHaveProperty("id");
     expect(spot).toHaveProperty("user_id");
     expect(spot).toHaveProperty("company_id");
@@ -49,8 +47,6 @@ describe("Create Spot", () => {
       company_id: "dcd9fd26-257d-4543-b3e0-f8e1f9f34afa",
       time_position: Position.Exit,
     });
-
-    console.log(spot);
 
     expect(spot).toHaveProperty("id");
     expect(spot).toHaveProperty("user_id");
