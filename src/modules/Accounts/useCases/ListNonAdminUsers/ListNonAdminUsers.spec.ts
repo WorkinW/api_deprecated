@@ -41,7 +41,10 @@ describe("List Users if user logged is admin", () => {
       });
     }
 
-    const users = await listNonAdminUsersUseCase.execute();
-    console.log(users);
+    const users = await listNonAdminUsersUseCase.execute({
+      user_id: "4cd5b8d6-1a7a-4de7-a294-d84efaa70d77",
+      name: "testes de lá",
+      cpf: "403426584585",
+    });
   });
 });
