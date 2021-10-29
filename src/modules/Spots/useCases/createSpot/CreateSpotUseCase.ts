@@ -25,7 +25,7 @@ class CreateSpotUseCase {
     let timePosition: Position;
 
     if (!spot) {
-      timePosition = Position.Exit;
+      timePosition = Position.Entry;
     }
 
     if (time_position) {
