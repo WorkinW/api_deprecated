@@ -1,7 +1,7 @@
 import { Spot } from "@modules/Spots/infra/typeorm/entities/Spot";
 import { ISpotsRepository } from "@modules/Spots/repositories/ISpotsRepository";
+import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
 import { inject, injectable } from "tsyringe";
-import { EnumType } from "typescript";
 
 enum Position {
   Entry = "entry",
@@ -15,13 +15,17 @@ interface IRequest {
 
 @injectable()
 class CreateSpotUseCase {
-  constructor(private spotsRepository: ISpotsRepository) { }
+  constructor(
+    private spotsRepository: ISpotsRepository,
+    private dateProvider: IDateProvider
+  ) { }
   async execute({
     user_id,
     company_id,
     time_position,
   }: IRequest): Promise<Spot> {
     const spot = await this.spotsRepository.findByTimePosition(user_id);
+    let compare: number;
     let timePosition: Position;
 
     if (!spot) {
@@ -40,9 +44,16 @@ class CreateSpotUseCase {
       timePosition = Position.Entry;
     }
 
+    if (spot) {
+      const dateNow = this.dateProvider.dateNow();
+      const spotDate = spot.created_at;
+      compare = this.dateProvider.compareInHours(spotDate, dateNow);
+    }
+
     const newSpot = await this.spotsRepository.create({
       user_id,
       company_id,
+      time_course: compare ? compare : 0,
       time_position: timePosition,
     });
 

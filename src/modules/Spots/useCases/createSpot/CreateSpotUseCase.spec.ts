@@ -1,4 +1,7 @@
 import { SpotsRepositoryInMemory } from "@modules/Spots/repositories/SpotsRepositoryInMemory";
+import dayjs from "dayjs";
+
+import { DayjsDateProvider } from "@shared/container/providers/DateProvider/implementations/DayjsDateProvider";
 
 import { CreateSpotUseCase } from "./CreateSpotUseCase";
 
@@ -9,11 +12,18 @@ enum Position {
 
 let createSpotUseCase: CreateSpotUseCase;
 let spotsRepositoryInMemory: SpotsRepositoryInMemory;
+let dayjsDateProvider: DayjsDateProvider;
 
 describe("Create Spot", () => {
+  //NOTE - This is a future test to be implemented
+  const dayAdd24Hours = dayjs().add(8, "hour").toDate();
+
   beforeEach(() => {
     spotsRepositoryInMemory = new SpotsRepositoryInMemory();
-    createSpotUseCase = new CreateSpotUseCase(spotsRepositoryInMemory);
+    createSpotUseCase = new CreateSpotUseCase(
+      spotsRepositoryInMemory,
+      dayjsDateProvider
+    );
   });
 
   it("should be able to create a new spot where time position is entry", async () => {
