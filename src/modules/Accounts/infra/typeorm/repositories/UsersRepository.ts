@@ -19,7 +19,7 @@ class UsersRepository implements IUsersRepository {
     password,
     cpf,
     avatar,
-    isAdmin,
+    is_admin,
     company_id,
   }: ICreateUserDTO): Promise<User> {
     const user = this.repository.create({
@@ -29,7 +29,7 @@ class UsersRepository implements IUsersRepository {
       password,
       cpf,
       avatar,
-      isAdmin,
+      is_admin,
       company_id,
     });
 
@@ -83,7 +83,7 @@ class UsersRepository implements IUsersRepository {
       .where("users.company_id = :company_id", {
         company_id,
       })
-      .andWhere("users.isAdmin = false");
+      .andWhere("users.is_admin = false");
 
     if (name) {
       usersQuery.andWhere("users.name like :name", {

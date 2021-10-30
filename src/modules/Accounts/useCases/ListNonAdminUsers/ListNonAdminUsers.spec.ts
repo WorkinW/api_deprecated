@@ -24,7 +24,7 @@ describe("List Users if user logged is admin", () => {
         email: `${randomString}@gmail.com`,
         password: "123456",
         cpf: randomNumber,
-        isAdmin: false,
+        is_admin: false,
         avatar: null,
         company_id: "4cd5b8d6-1a7a-4de7-a294-d84efaa70d77",
       });
@@ -35,7 +35,7 @@ describe("List Users if user logged is admin", () => {
         email: `${randomString}@gmail.com`,
         password: "123456",
         cpf: randomNumber,
-        isAdmin: true,
+        is_admin: true,
         avatar: null,
         company_id: "4cd5b8d6-1a7a-4de7-a294-d84efaa70d77",
       });

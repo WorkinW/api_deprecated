@@ -20,7 +20,7 @@ class CreateUserUseCase {
     password,
     cpf,
     avatar,
-    isAdmin,
+    is_admin,
     company_id,
   }: ICreateUserDTO): Promise<User> {
     const userAlreadyExists = await this.usersRepository.findByEmail(email);
@@ -38,7 +38,7 @@ class CreateUserUseCase {
       password: passwordHas,
       cpf,
       avatar,
-      isAdmin,
+      is_admin,
       company_id,
     });
 

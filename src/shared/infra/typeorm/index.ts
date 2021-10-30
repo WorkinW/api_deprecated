@@ -16,7 +16,9 @@ export default async (host = "localhost"): Promise<Connection> => {
   const connection = await getConnectionOptions();
   return createConnection(
     Object.assign(connection, {
-      host, //Essa opção deverá ser EXATAMENTE o nome dado ao service do banco de dados
+      host: process.env.NODE_ENV === "test" ? "localhost" : host, //Essa opção deverá ser EXATAMENTE o nome dado ao service do banco de dados
+      database:
+        process.env.NODE_ENV === "test" ? "workin" : connection.database,
     })
   );
 };

@@ -37,7 +37,7 @@ class User {
   cpf: string;
 
   @Column()
-  isAdmin: boolean;
+  is_admin: boolean;
 
   @Column()
   avatar: string;
