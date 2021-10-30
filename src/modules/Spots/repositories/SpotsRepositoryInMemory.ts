@@ -8,6 +8,10 @@ class SpotsRepositoryInMemory implements ISpotsRepository {
     return this.spots.find((spot) => spot.user_id === user_id);
   }
 
+  async findByLastSpot(user_id: string): Promise<Spot> {
+    return this.spots.find((spot) => spot.user_id === user_id);
+  }
+
   async create({
     user_id,
     company_id,
