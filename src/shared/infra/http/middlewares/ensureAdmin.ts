@@ -18,7 +18,7 @@ export async function ensureAdmin(
     throw new AppError("You must be logged in");
   }
 
-  if (!user.isAdmin) {
+  if (!user.is_admin) {
     throw new AppError("You must be an admin");
   }
 

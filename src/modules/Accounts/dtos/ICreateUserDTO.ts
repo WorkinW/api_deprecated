@@ -6,7 +6,7 @@ interface ICreateUserDTO {
   cpf: string;
   id?: string;
   avatar?: string;
-  isAdmin?: boolean;
+  is_admin?: boolean;
   company_id?: string;
 }
 

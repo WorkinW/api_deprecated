@@ -11,7 +11,7 @@ async function create() {
 
   await connection.query(
     `
-      INSERT INTO users (id, name, username, email, password, "isAdmin", created_at) VALUES ('${id}', 'Admin', 'admin', 'admin@workin', '${password}', true, 'now()')
+      INSERT INTO users (id, name, username, email, password, "is_admin", created_at) VALUES ('${id}', 'Admin', 'admin', 'admin@workin', '${password}', true, 'now()')
     `
   );
 }

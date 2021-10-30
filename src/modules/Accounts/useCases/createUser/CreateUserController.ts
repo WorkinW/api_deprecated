@@ -12,7 +12,7 @@ class CreateUserController {
       password,
       cpf,
       avatar,
-      isAdmin,
+      is_admin,
       company_id,
     } = request.body;
     const createUserUseCase = container.resolve(CreateUserUseCase);
@@ -24,7 +24,7 @@ class CreateUserController {
       password,
       cpf,
       avatar,
-      isAdmin,
+      is_admin,
       company_id,
     });
 
