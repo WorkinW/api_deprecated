@@ -10,7 +10,7 @@ interface IUsersRepository {
     password,
     cpf,
     avatar,
-    isAdmin,
+    is_admin,
     company_id,
   }: ICreateUserDTO): Promise<User>;
   update({
@@ -20,7 +20,7 @@ interface IUsersRepository {
     password,
     cpf,
     avatar,
-    isAdmin,
+    is_admin,
     company_id,
   }: ICreateUserDTO): Promise<void>;
   findByEmail(email: string): Promise<User>;
