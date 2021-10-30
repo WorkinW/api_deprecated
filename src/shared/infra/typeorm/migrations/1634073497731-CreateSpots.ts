@@ -12,6 +12,12 @@ export class CreateSpots1634073497731 implements MigrationInterface {
             isPrimary: true,
           },
           {
+            name: "sequence",
+            type: "int",
+            isGenerated: true,
+            generationStrategy: "increment",
+          },
+          {
             name: "company_id",
             type: "uuid",
             isNullable: true,

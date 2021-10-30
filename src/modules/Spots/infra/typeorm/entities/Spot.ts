@@ -20,6 +20,9 @@ class Spot {
   @PrimaryColumn("uuid")
   id?: string;
 
+  @Column()
+  sequence: string;
+
   @ManyToOne(() => Company)
   @JoinColumn({ name: "company_id" })
   company: Company;
