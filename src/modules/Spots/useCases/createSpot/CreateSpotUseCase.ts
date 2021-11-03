@@ -40,12 +40,13 @@ class CreateSpotUseCase {
       }
     }
 
-    if (spot && time_position == "exit") {
+    if (lastSpot && time_position == "exit") {
       const dateNow = this.dateProvider.dateNow();
       const spotDate = lastSpot.created_at;
       compare = this.dateProvider.compareInHours(dateNow, spotDate);
       compare =
-        parseInt(spot.time_course.toString()) + parseInt(compare.toString());
+        parseInt(lastSpot.time_course.toString()) +
+        parseInt(compare.toString());
     }
 
     const newSpot = await this.spotsRepository.create({
