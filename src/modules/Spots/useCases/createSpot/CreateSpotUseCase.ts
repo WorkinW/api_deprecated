@@ -33,7 +33,7 @@ class CreateSpotUseCase {
     let compare: number;
 
     if (spot) {
-      if (lastSpot.time_position == time_position) {
+      if (spot.time_position == time_position) {
         throw new AppError(
           "The last point registered is the same that is being registered now, are you sure about that?"
         );

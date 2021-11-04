@@ -25,7 +25,6 @@ class ListSpotsUseCase {
     const company_id = user.company_id;
     if (user.is_admin) {
       const spots = await this.spotsRepository.findAllSpots({
-        user_id,
         company_id,
       });
       return spots;

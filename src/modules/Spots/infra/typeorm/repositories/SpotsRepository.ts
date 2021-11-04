@@ -14,7 +14,7 @@ class SpotsRepository implements ISpotsRepository {
 
   async findByTimePosition(user_id: string): Promise<Spot> {
     const spotOfUser = await this.repository.findOne({
-      where: { user_id, time_position: "exit" },
+      where: { user_id },
       order: { created_at: "DESC" },
     });
 
@@ -23,7 +23,7 @@ class SpotsRepository implements ISpotsRepository {
 
   async findByLastSpot(user_id: string): Promise<Spot> {
     const spotOfUser = await this.repository.findOne({
-      where: { user_id },
+      where: { user_id, time_position: "exit" },
       order: { created_at: "DESC" },
     });
 
@@ -48,9 +48,9 @@ class SpotsRepository implements ISpotsRepository {
     return spot;
   }
 
-  async findAllSpots({ user_id, company_id }: IListSpotDTO): Promise<Spot[]> {
+  async findAllSpots({ company_id }: IListSpotDTO): Promise<Spot[]> {
     const spots = await this.repository.find({
-      where: { user_id, company_id },
+      where: { company_id },
       order: { created_at: "DESC" },
     });
 
