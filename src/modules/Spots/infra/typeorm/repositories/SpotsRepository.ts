@@ -1,4 +1,5 @@
 import { ICreateSpotDTO } from "@modules/Spots/dtos/ICreateSpotDTO";
+import { IListSpotDTO } from "@modules/Spots/dtos/IListSpotDTO";
 import { ISpotsRepository } from "@modules/Spots/repositories/ISpotsRepository";
 import { getRepository, Repository } from "typeorm";
 
@@ -45,6 +46,24 @@ class SpotsRepository implements ISpotsRepository {
     await this.repository.save(spot);
 
     return spot;
+  }
+
+  async findAllSpots({ user_id, company_id }: IListSpotDTO): Promise<Spot[]> {
+    const spots = await this.repository.find({
+      where: { user_id, company_id },
+      order: { created_at: "DESC" },
+    });
+
+    return spots;
+  }
+
+  async findAllByUserId({ user_id }: IListSpotDTO): Promise<Spot[]> {
+    const spots = await this.repository.find({
+      where: { user_id },
+      order: { created_at: "DESC" },
+    });
+
+    return spots;
   }
 }
 
