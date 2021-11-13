@@ -2,6 +2,7 @@ import { IUsersRepository } from "@modules/Accounts/repositories/IUsersRepositor
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
+import { v4 as uuidv4 } from "uuid";
 
 import { AppError } from "@shared/errors/AppError";
 
@@ -19,6 +20,7 @@ interface IResponse {
     isAdmin?: boolean;
   };
   token: string;
+  refreshToken: string;
 }
 
 @injectable()
@@ -46,8 +48,11 @@ class AuthenticateUserUseCase {
       expiresIn: "1d",
     });
 
+    const refreshToken = uuidv4();
+
     const tokenReturn: IResponse = {
       token,
+      refreshToken,
       user: {
         id: user.id,
         name: user.name,
