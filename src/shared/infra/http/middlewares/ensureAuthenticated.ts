@@ -1,7 +1,8 @@
-import { AppError } from "@shared/errors/AppError";
 import { UsersRepository } from "@modules/Accounts/infra/typeorm/repositories/UsersRepository";
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
+
+import { AppError } from "@shared/errors/AppError";
 
 interface IPayload {
   sub: string;
@@ -40,6 +41,6 @@ export async function ensureAuthenticated(
 
     next();
   } catch (error) {
-    throw new AppError("Invalid token!", 401);
+    throw new AppError("Invalid token!", 423);
   }
 }
