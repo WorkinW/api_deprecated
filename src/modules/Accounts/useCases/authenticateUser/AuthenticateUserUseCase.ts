@@ -8,6 +8,7 @@ import { AppError } from "@shared/errors/AppError";
 interface IRequest {
   email: string;
   password: string;
+  isAdmin?: boolean;
 }
 
 interface IResponse {
@@ -15,6 +16,7 @@ interface IResponse {
     id: string;
     name: string;
     email: string;
+    isAdmin?: boolean;
   };
   token: string;
 }
@@ -50,8 +52,10 @@ class AuthenticateUserUseCase {
         id: user.id,
         name: user.name,
         email: user.email,
+        isAdmin: user.is_admin,
       },
     };
+
     return tokenReturn;
   }
 }
