@@ -7,12 +7,23 @@ import "@shared/container";
 
 import { AppError } from "@shared/errors/AppError";
 import { router } from "@shared/infra/http/routes";
+
+import cors from "cors";
+
 import createConnection from "@shared/infra/typeorm";
 
 import swaggerFile from "../../../swagger.json";
 
 createConnection();
 const app = express();
+
+const allowedOrigins = ["http://localhost:3000"];
+
+const options: cors.CorsOptions = {
+  origin: allowedOrigins,
+};
+
+app.use(cors(options));
 
 app.use(express.json());
 
