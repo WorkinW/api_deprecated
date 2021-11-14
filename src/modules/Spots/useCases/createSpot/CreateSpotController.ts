@@ -9,13 +9,13 @@ class CreateSpotController {
     const { id } = request.user;
     const createSpotUseCase = container.resolve(CreateSpotUseCase);
 
-    await createSpotUseCase.execute({
+    const spot = await createSpotUseCase.execute({
       user_id: id,
       company_id,
       time_position,
     });
 
-    return response.status(201).send();
+    return response.json(spot).status(201);
   }
 }
 
