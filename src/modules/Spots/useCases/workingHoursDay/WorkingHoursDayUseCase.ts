@@ -43,8 +43,6 @@ class WorkingHoursDayUseCase {
       return `${textHours}:${textMinutes}`;
     };
 
-    console.log(minutes, converter(minutes));
-    
     return {
       hours: converter(minutes),
       minutes,
