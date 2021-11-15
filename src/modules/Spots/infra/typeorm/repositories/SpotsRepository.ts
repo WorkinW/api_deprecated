@@ -23,7 +23,7 @@ class SpotsRepository implements ISpotsRepository {
 
   async findByLastSpot(user_id: string): Promise<Spot> {
     const spotOfUser = await this.repository.findOne({
-      where: { user_id, time_position: "exit" },
+      where: { user_id, time_position: "entry" },
       order: { created_at: "DESC" },
     });
 

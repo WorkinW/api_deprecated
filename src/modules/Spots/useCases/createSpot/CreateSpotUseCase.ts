@@ -30,6 +30,7 @@ class CreateSpotUseCase {
   }: IRequest): Promise<Spot> {
     const spot = await this.spotsRepository.findByTimePosition(user_id);
     const lastSpot = await this.spotsRepository.findByLastSpot(user_id);
+
     let compare: number;
 
     if (spot) {

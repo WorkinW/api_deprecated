@@ -7,6 +7,7 @@ interface IRequest {
 
 type TimeSpots = {
   hours: string;
+  minutes: number;
 };
 
 @injectable()
@@ -18,9 +19,19 @@ class WorkingHoursDayUseCase {
 
   async execute({ user_id }: IRequest): Promise<TimeSpots> {
     const spots = await this.spotsRepository.findAllByUserId({ user_id });
+    const allMinutesDay = [];
+    const today = new Date();
 
-    const minutes = spots.reduce(function (prevVal, elem) {
-      return prevVal + elem.time_course;
+    spots.map(function (spot) {
+      if (spot.created_at.getDate() === today.getDate()) {
+        allMinutesDay.push({
+          time: spot.time_course,
+        });
+      }
+    });
+
+    const minutes = allMinutesDay.reduce(function (prevVal, elem) {
+      return parseInt(prevVal) + parseInt(elem.time);
     }, 0);
 
     const converter = (minutes) => {
@@ -32,8 +43,11 @@ class WorkingHoursDayUseCase {
       return `${textHours}:${textMinutes}`;
     };
 
+    console.log(minutes, converter(minutes));
+    
     return {
       hours: converter(minutes),
+      minutes,
     };
   }
 }
